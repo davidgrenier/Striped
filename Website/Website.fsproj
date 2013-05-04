@@ -21,9 +21,13 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <WarningLevel>3</WarningLevel>
   </PropertyGroup>
+  <Import Project="WebSharper.targets" Condition="Exists('WebSharper.targets')" />
+  <Import Project="$(WEBSHARPER_HOME)/IntelliFactory.WebSharper.targets" />
   <ItemGroup>
     <Compile Include="MyControl.fs" />
     <Compile Include="Site.fs" />
+    <None Include="WebSharper.targets" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
@@ -32,6 +36,4 @@
     <Reference Include="System.Numerics" />
     <Reference Include="System.Web" />
   </ItemGroup>
-  <Import Project="WebSharper.targets" Condition="Exists('WebSharper.targets')" />
-  <Import Project="$(WEBSHARPER_HOME)/IntelliFactory.WebSharper.targets" />
 </Project>
