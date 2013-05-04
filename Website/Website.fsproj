@@ -26,10 +26,12 @@
   <Import Project="WebSharper.targets" Condition="Exists('WebSharper.targets')" />
   <Import Project="$(WEBSHARPER_HOME)/IntelliFactory.WebSharper.targets" />
   <ItemGroup>
-    <Compile Include="MyControl.fs" />
-    <Compile Include="Site.fs" />
     <None Include="WebSharper.targets" />
     <None Include="packages.config" />
+    <Compile Include="Lib.fs" />
+    <Compile Include="Client.fs" />
+    <Compile Include="Striped.fs" />
+    <Compile Include="Site.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />

@@ -34,6 +34,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="css\images\bg2.png" />
+    <Content Include="css\skel-noscript.css" />
+    <Content Include="css\style-desktop.css" />
+    <Content Include="css\style-narrow.css" />
+    <Content Include="css\style-wide.css" />
+    <Content Include="css\style.css" />
+    <Content Include="js\config.js" />
+    <Content Include="js\jquery-1.9.1.min.js" />
+    <Content Include="js\skel-ui.min.js" />
+    <Content Include="js\skel.min.js" />
     <Content Include="Scripts\*.js" />
     <Content Include="Content\**\*.*" />
     <Content Include="Themes\**\*.*" />
