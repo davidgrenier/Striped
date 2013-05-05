@@ -8,13 +8,18 @@ let divi id content = Div [Id id] -< content
 
 let byLine text = span text |+ "byline"
 
-let header h text = HTML5.Tags.Header [H2 [a "#" h]; byLine text]    
+let dead = a "#"
+
+let header h text = HTML5.Tags.Header [H2 [dead h]; byLine text]    
 
 let article content = HTML5.Tags.Article content |+ "is-post is-post-excerpt"
 
 let fullImage url = A [HRef "#"] -- Img [Src ("images/" + url); Alt ""] |+ "image image-full"
 
 let infoBlock content = Div content |+ "info"
+
+let h5u () = a "http://html5up.net/" "HTML5 UP"
+let aj() = a "http://n33.co/" "AJ"
 
 let content =
     let inner =
@@ -28,27 +33,25 @@ let content =
         let icoLis v1 v2 v3 v4 =
             [for x in 1..4 -> string x]
             |> List.zip [v1; v2; v3; v4]
-            |> List.map (fun (v, c) -> LI [a "#" (string v) |+ ("link-icon24 link-icon24-" + c)])
+            |> List.map (fun (v, c) -> LI [dead (string v) |+ ("link-icon24 link-icon24-" + c)])
             |> UL     
             |+ "stats"
                       
         let article1 =
-            let h5u () = a "http://html5up.net/" "HTML5 UP"
-
             let p1 =
                 P [Strong [Text "Hello!"]]
                 ++ " You're looking at "
                 -- a "http://html5up.net/striped/" "Striped"
                 ++ ", a fully responsive HTML5 site template designed by "
-                -- a "http://n33.co/" "AJ"
+                -- aj()
                 ++ " for " -- h5u()
                 ++ " It features a clean, minimalistic design, styling for all basic page elements (including blockquotes, tables and lists), a
-responsible sidebar (left or right), and HTML5/CSS3 code designed for quick and easy customization (see code comments for details)."
+repositionable sidebar (left or right), and HTML5/CSS3 code designed for quick and easy customization (see code comments for details)."
 
             let p2 =
                 P [Text "Striped is released for free under the "]
                 -- a "http://html5up.net/license/" "Creative Commons Attribution license"
-                ++ " so feel free to use it for personal projects or even commercial ones &ndash; just be sure to credit " -- h5u()
+                ++ " so feel free to use it for personal projects or even commercial ones – just be sure to credit " -- h5u()
                 ++ " for the design. If you like what you see here, be sure to check out " -- h5u()
                 ++ " for more cool designs or follow me on "
                 -- a "http://twitter.com/n33co" "Twitter"
@@ -86,14 +89,14 @@ Nunc nulla velit, fermentum quis interdum quis, convallis eu sapien. Integer sed
             article2
             Div [
                 Div [
-                    a "#" "1" |+ "active"
-                    a "#" "2"
-                    a "#" "3"
-                    a "#" "4"
-                    span "&hellip;"
-                    a "#" "20"
+                    dead "1" |+ "active"
+                    dead "2"
+                    dead "3"
+                    dead "4"
+                    span "…"
+                    dead "20"
                 ] |+ "pages"
-                a "#" "Next Page" |+ "button next"
+                dead "Next Page" |+ "button next"
             ] |+ "pager"
         ]
 
@@ -102,11 +105,30 @@ Nunc nulla velit, fermentum quis interdum quis, convallis eu sapien. Integer sed
 let section content clazz = HTML5.Tags.Section content |+ clazz
 
 let sidebar =
+    let deadLi text = LI [dead text]
+    let search = HTML5.Attr.PlaceHolder "search"
     divi "sidebar" [
-        divi "logo" []
+        divi "logo" [H1 [Text "STRIPED"]]
         HTML5.Tags.Nav [Id "nav"]
-        section [] "is-search"
-        section [] "is-search-style1"
+        -- UL [
+            deadLi "Latest Post" |+ "current_page_item"
+            deadLi "Archives"
+            deadLi "About Me"
+            deadLi "Contact Me"
+        ]
+        section [
+            Form [Input [Attr.Type "text"; Name "search"; search] |+ "text"]
+            -< [Method "post"; Action "#"]
+        ] "is-search"
+        section [
+            Div [
+                P [Strong [Text "Striped:"]]
+                ++ " A free and fully responsive HTML5 site template designed by "
+                -- aj()
+                ++ " for "
+                -- h5u()
+            ] |+ "inner"
+        ] "is-search-style1"
         section [] "is-recent-post"
         section [] "is-recent-comment"
         section [] "is-calendar"
