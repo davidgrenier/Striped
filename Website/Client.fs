@@ -18,7 +18,7 @@ let fullImage url = A [HRef "#"] -- Img [Src ("images/" + url); Alt ""] |+ "imag
 
 let infoBlock content = Div content |+ "info"
 
-let h5u () = a "http://html5up.net/" "HTML5 UP"
+let h5u text = a "http://html5up.net/" text
 let aj() = a "http://n33.co/" "AJ"
 
 let content =
@@ -44,15 +44,15 @@ let content =
                 -- a "http://html5up.net/striped/" "Striped"
                 ++ ", a fully responsive HTML5 site template designed by "
                 -- aj()
-                ++ " for " -- h5u()
+                ++ " for " -- h5u "HTML5 UP"
                 ++ " It features a clean, minimalistic design, styling for all basic page elements (including blockquotes, tables and lists), a
 repositionable sidebar (left or right), and HTML5/CSS3 code designed for quick and easy customization (see code comments for details)."
 
             let p2 =
                 P [Text "Striped is released for free under the "]
                 -- a "http://html5up.net/license/" "Creative Commons Attribution license"
-                ++ " so feel free to use it for personal projects or even commercial ones – just be sure to credit " -- h5u()
-                ++ " for the design. If you like what you see here, be sure to check out " -- h5u()
+                ++ " so feel free to use it for personal projects or even commercial ones – just be sure to credit " -- h5u "HTML5 UP"
+                ++ " for the design. If you like what you see here, be sure to check out " -- h5u "HTML5 UP"
                 ++ " for more cool designs or follow me on "
                 -- a "http://twitter.com/n33co" "Twitter"
                 ++ " for new releases and updates."
@@ -107,30 +107,62 @@ let section content clazz = HTML5.Tags.Section content |+ clazz
 let sidebar =
     let deadLi text = LI [dead text]
     let search = HTML5.Attr.PlaceHolder "search"
-    divi "sidebar" [
-        divi "logo" [H1 [Text "STRIPED"]]
+    let deadLis = List.map deadLi >> UL
+
+    let nav =
         HTML5.Tags.Nav [Id "nav"]
-        -- UL [
-            deadLi "Latest Post" |+ "current_page_item"
-            deadLi "Archives"
-            deadLi "About Me"
-            deadLi "Contact Me"
-        ]
+        -- (deadLis ["Archives"; "About Me"; "Contact Me"] +< [deadLi "Latest Post" |+ "current_page_item"])
+
+    let search =
         section [
             Form [Input [Attr.Type "text"; Name "search"; search] |+ "text"]
             -< [Method "post"; Action "#"]
         ] "is-search"
+
+    let speech =
         section [
             Div [
                 P [Strong [Text "Striped:"]]
                 ++ " A free and fully responsive HTML5 site template designed by "
                 -- aj()
                 ++ " for "
-                -- h5u()
+                -- h5u "HTML5 up!"
             ] |+ "inner"
-        ] "is-search-style1"
-        section [] "is-recent-post"
-        section [] "is-recent-comment"
+        ] "is-text-style1"
+
+    let informal hText content clazz =
+        section [
+            HTML5.Tags.Header [H2 [Text hText]]
+            content
+        ] clazz
+
+    let recentPosts =
+        informal "Recent Posts" (
+            deadLis [
+                "Nothing happened"
+                "My Dearest Cthulhu"
+                "The Meme Meme"
+                "Now Full Cyborg"
+                "Temporal Flux"
+            ]
+        ) "is-recent-posts"
+
+    let recentComments =
+        informal "Recent Comments" (
+            [
+                "case on ", "Now Full Cyborg"
+                "molly on ", "Untitled Post"
+                "case on ", "Temporal Flux"
+            ] |> List.map (fun (c, p) -> LI [] ++ c -- dead p) |> UL
+        ) "is-recent-comments"
+
+    divi "sidebar" [
+        divi "logo" [H1 [Text "STRIPED"]]
+        nav
+        search
+        speech
+        recentPosts
+        recentComments
         section [] "is-calendar"
         divi "copyright" []
     ]
