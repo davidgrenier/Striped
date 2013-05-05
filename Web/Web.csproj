@@ -36,11 +36,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="css\images\bg1.png" />
     <Content Include="css\images\bg2.png" />
+    <Content Include="css\images\sprites.png" />
     <Content Include="css\skel-noscript.css" />
     <Content Include="css\style-desktop.css" />
     <Content Include="css\style-narrow.css" />
     <Content Include="css\style-wide.css" />
     <Content Include="css\style.css" />
+    <Content Include="images\fotogrph-dark-stairwell.jpg" />
     <Content Include="images\n33-robot-invader.jpg" />
     <Content Include="js\config.js" />
     <Content Include="js\jquery-1.9.1.min.js" />
