@@ -1,5 +1,12 @@
 ﻿[<AutoOpen>]
 module Website.Lib
 
-type JS = IntelliFactory.WebSharper.Pervasives.JavaScriptAttribute
+open IntelliFactory.WebSharper
+open IntelliFactory.WebSharper.Html
 
+type JS = Pervasives.JavaScriptAttribute
+
+[<JS>]
+[<AutoOpen>]
+module Pervasives =
+    let (|+) (elem: Element) clazz = elem -- Attr.Class clazz
