@@ -157,15 +157,14 @@ let sidebar =
         ) "is-recent-comments"
 
     let calendar =
-        let calendarData hasEvents =
-            List.map (fun x ->
-                    match Seq.exists ((=) x) hasEvents with
-                    | true -> [dead (string x)]
-                    | _ -> [Span [] ++ string x]
+        let calendarData =
+            List.map (function
+                    | 6 | 10 | 23 | 25 as x -> [dead (string x)]
+                    | x -> [Span [] ++ string x]
                 )
             >> List.map TD
 
-        let calendarRow hasEvents days = calendarData hasEvents days |> TR
+        let calendarRow = calendarData >> TR
 
         let spacing width = TD [ColSpan (string width)] -- Span [Text "\u00A0"] |+ "pad"
             
@@ -182,11 +181,11 @@ let sidebar =
                         |> TR
                     ]
                     TBody [
-                        calendarRow [] [1..3] +< [spacing 4]
-                        calendarRow [6; 10] [4..10]
-                        calendarRow [] [11..13] -- (TD [dead "14"] |+ "today") -< calendarData [] [15..17]
-                        calendarRow [23] [18..24]
-                        calendarRow [25] [25..28] -- spacing 3
+                        calendarRow [1..3] +< [spacing 4]
+                        calendarRow [4..10]
+                        calendarRow [11..13] -- (TD [dead "14"] |+ "today") -< calendarData [15..17]
+                        calendarRow [18..24]
+                        calendarRow [25..28] -- spacing 3
                     ]
                 ]
             ] |+ "inner"
@@ -206,8 +205,7 @@ let sidebar =
             -- a "http://n33.co/" "n33" ++ ", "
             -- a "http://fotogrph.com/" "fotogrph" ++ ", "
             -- a "http://iconify.it/" "Iconify.it" -- Br []
-            ++ "Design: "
-            -- h5u "HTML5 UP"
+            ++ "Design: " -- h5u "HTML5 UP"
         ]
     ]
 
