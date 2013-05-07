@@ -200,7 +200,15 @@ let sidebar =
         recentPosts
         recentComments
         calendar
-        divi "copyright" []
+        divi "copyright" [
+            P [Text "© 2013 An Untitled Site."] -- Br []
+            ++ "Images: "
+            -- a "http://n33.co/" "n33" ++ ", "
+            -- a "http://fotogrph.com/" "fotogrph" ++ ", "
+            -- a "http://iconify.it/" "Iconify.it" -- Br []
+            ++ "Design: "
+            -- h5u "HTML5 UP"
+        ]
     ]
 
 let page =
