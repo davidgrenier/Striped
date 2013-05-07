@@ -156,6 +156,42 @@ let sidebar =
             ] |> List.map (fun (c, p) -> LI [] ++ c -- dead p) |> UL
         ) "is-recent-comments"
 
+    let calendar =
+        let calendarData hasEvents =
+            List.map (fun x ->
+                    match Seq.exists ((=) x) hasEvents with
+                    | true -> [dead (string x)]
+                    | _ -> [Span [] ++ string x]
+                )
+            >> List.map TD
+
+        let calendarRow hasEvents days = calendarData hasEvents days |> TR
+
+        let spacing width = TD [ColSpan (string width)] -- Span [Text "\u00A0"] |+ "pad"
+            
+        section [
+            Div [
+                Table [
+                    Caption [Text "February 2013"]
+                    THead [
+                        [
+                            "Monday"; "Tuesday"
+                            "Wednesday"; "Thursday"
+                            "Friday"; "Saturday"; "Sunday"
+                        ] |> List.map (fun d -> TH [Attr.Scope "col"; Attr.Title d] ++ d.Substring(0, 1))
+                        |> TR
+                    ]
+                    TBody [
+                        calendarRow [] [1..3] +< [spacing 4]
+                        calendarRow [6; 10] [4..10]
+                        calendarRow [] [11..13] -- (TD [dead "14"] |+ "today") -< calendarData [] [15..17]
+                        calendarRow [23] [18..24]
+                        calendarRow [25] [25..28] -- spacing 3
+                    ]
+                ]
+            ] |+ "inner"
+        ] "is-calendar"
+
     divi "sidebar" [
         divi "logo" [H1 [Text "STRIPED"]]
         nav
@@ -163,7 +199,7 @@ let sidebar =
         speech
         recentPosts
         recentComments
-        section [] "is-calendar"
+        calendar
         divi "copyright" []
     ]
 
