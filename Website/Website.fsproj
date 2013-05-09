@@ -29,6 +29,7 @@
     <None Include="WebSharper.targets" />
     <None Include="packages.config" />
     <Compile Include="Lib.fs" />
+    <Compile Include="Config.fs" />
     <Compile Include="Client.fs" />
     <Compile Include="Striped.fs" />
     <Compile Include="Site.fs" />

@@ -207,6 +207,9 @@ let sidebar =
     ]
 
 let page =
+//    Config.config()
+//    Config.uiConfig()
+
     divi "wrapper" [
         content
         sidebar
