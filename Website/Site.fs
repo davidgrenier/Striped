@@ -6,32 +6,33 @@ open IntelliFactory.WebSharper.Sitelets
 type Page =
     | [<CompiledName "">] Home
 
-
 module Header =
     let freeMeta name = Tags.Meta [Name name; Attr.Content ""]
     let stylesheet href = Link [Rel "stylesheet"; HRef href]
+    let css file = stylesheet (sprintf "css/%s.css" file)
+    let js file = Script [Src (sprintf "js/%s.js" file)]
     let head =
         [
             Tags.Meta [HttpEquiv "content-type"; Attr.Content "text/html; charset=utf-8"]
             freeMeta "description"
             freeMeta "keywords"
             stylesheet "http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700|Open+Sans+Condensed:300,700"
-            Script [Src "js/jquery-1.9.1.min.js"]
-            Script [Src "js/config.js"]
-            Script [Src "js/skel.min.js"]
-            Script [Src "js/skel-ui.min.js"]
+            js "jquery-1.9.1.min"
+            js "config"
+            js "skel.min"
+            js "skel-ui.min"
             NoScript [
-                stylesheet "css/skel-noscript.css"
-                stylesheet "css/style.css"
-                stylesheet "css/style-desktop.css"
-                stylesheet "css/style-wide.css"
+                css "skel-noscript"
+                css "style"
+                css "style-desktop"
+                css "style-wide"
             ]
         ]
 
 type Site () =
     interface IWebsite<Page> with
-        member __.Actions = []
-        member __.Sitelet =
+        member x.Actions = []
+        member x.Sitelet =
             Sitelet.Infer <| function
                 | Home ->
                     PageContent <| fun ctx ->

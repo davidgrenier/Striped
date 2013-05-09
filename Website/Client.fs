@@ -173,11 +173,8 @@ let sidebar =
                 Table [
                     Caption [Text "February 2013"]
                     THead [
-                        [
-                            "Monday"; "Tuesday"
-                            "Wednesday"; "Thursday"
-                            "Friday"; "Saturday"; "Sunday"
-                        ] |> List.map (fun d -> TH [Attr.Scope "col"; Attr.Title d] ++ d.Substring(0, 1))
+                        ["Monday"; "Tuesday"; "Wednesday"; "Thursday"; "Friday"; "Saturday"; "Sunday"]
+                        |> List.map (fun d -> TH [Attr.Scope "col"; Attr.Title d] ++ d.Substring(0, 1))
                         |> TR
                     ]
                     TBody [
