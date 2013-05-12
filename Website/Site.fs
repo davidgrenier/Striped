@@ -13,7 +13,7 @@ module Header =
     let js file = Script [Src (sprintf "js/%s.js" file)]
     let head =
         [
-            Tags.Meta [HttpEquiv "content-type"; Attr.Content "text/html; charset=utf-8"]
+            Tags.Meta [CharSet "utf-8"]
             freeMeta "description"
             freeMeta "keywords"
             stylesheet "http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700|Open+Sans+Condensed:300,700"
